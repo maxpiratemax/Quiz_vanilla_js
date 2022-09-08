@@ -2,41 +2,41 @@ const questions = [
   {
     question: "Какой язык работает в браузере?",
     answers: ["Java", "C", "Python", "JavaScript"],
-    correct: 4,
+    correct: "JavaScript",
   },
-  // {
-  //   question: "Что означает CSS?",
-  //   answers: [
-  //     "Central Style Sheets",
-  //     "Cascading Style Sheets",
-  //     "Cascading Simple Sheets",
-  //     "Cars SUVs Sailboats",
-  //   ],
-  //   correct: 2,
-  // },
-  // {
-  //   question: "Что означает HTML?",
-  //   answers: [
-  //     "Hypertext Markup Language",
-  //     "Hypertext Markdown Language",
-  //     "Hyperloop Machine Language",
-  //     "Helicopters Terminals Motorboats Lamborginis",
-  //   ],
-  //   correct: 1,
-  // },
-  // {
-  //   question: "В каком году был создан JavaScript?",
-  //   answers: ["1996", "1995", "1994", "все ответы неверные"],
-  //   correct: 2,
-  // },
-  // {
-  //   question: `Что будет выведено в консоль в результате выполнения данного кода?
-  //   <span class="code">function foo() {} <br>
-  //   console.log(typeof foo());</span>
-  //   `,
-  //   answers: ["function", "undefined", "null", "number"],
-  //   correct: 2,
-  // },
+  {
+    question: "Что означает CSS?",
+    answers: [
+      "Central Style Sheets",
+      "Cascading Style Sheets",
+      "Cascading Simple Sheets",
+      "Cars SUVs Sailboats",
+    ],
+    correct: "Cascading Style Sheets",
+  },
+  {
+    question: "Что означает HTML?",
+    answers: [
+      "Hypertext Markup Language",
+      "Hypertext Markdown Language",
+      "Hyperloop Machine Language",
+      "Helicopters Terminals Motorboats Lamborginis",
+    ],
+    correct: "Hypertext Markup Language",
+  },
+  {
+    question: "В каком году был создан JavaScript?",
+    answers: ["1996", "1995", "1994", "все ответы неверные"],
+    correct: "1995",
+  },
+  {
+    question: `Что будет выведено в консоль в результате выполнения данного кода?
+    <span class="code">function foo() {} <br>
+    console.log(typeof foo());</span>
+    `,
+    answers: ["function", "undefined", "null", "number"],
+    correct: "undefined",
+  },
 ];
 
 let score = 0;
@@ -49,7 +49,7 @@ const subtitle = document.querySelector("#subtitle");
 
 shuffleQuestions(questions)
 // Доработать функцию ниже
-// shuffleAnswers(questions)
+shuffleAnswers(questions)
 clearPage();
 showQuestion();
 submitBtn.onclick = checkAnswer;
@@ -62,7 +62,7 @@ function clearPage() {
 
 function showQuestion() {
   const subtitleTemplate = `<p id="subtitle">%currentQuestion% / %allQuestions%</p>`
-  let subtitleTemplateNew = subtitleTemplate.replace('%currentQuestion%', questionIndex)
+  let subtitleTemplateNew = subtitleTemplate.replace('%currentQuestion%', questionIndex + 1)
   subtitleTemplateNew = subtitleTemplateNew.replace('%allQuestions%', questions.length)  
   subtitle.innerHTML = subtitleTemplateNew
 
@@ -84,7 +84,7 @@ function showQuestion() {
 
     let answerHTML = questionTemplate
       .replace("%answer%", answerText)
-      .replace("%number%", index + 1);
+      .replace("%number%", answerText);
     listContainer.innerHTML += answerHTML;
   }
 }
@@ -99,7 +99,7 @@ function checkAnswer() {
     return;
   }
 
-  const userAnswer = parseInt(checkedRadio.value);
+  const userAnswer = checkedRadio.value;
 
   if (userAnswer === questions[questionIndex].correct) {
     score++;
