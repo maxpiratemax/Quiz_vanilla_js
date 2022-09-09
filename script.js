@@ -1,34 +1,34 @@
 const questions = [
-  // {
-  //   question: "Какой язык работает в браузере?",
-  //   answers: ["Java", "C", "Python", "JavaScript"],
-  //   correct: "JavaScript",
-  // },
-  // {
-  //   question: "Что означает CSS?",
-  //   answers: [
-  //     "Central Style Sheets",
-  //     "Cascading Style Sheets",
-  //     "Cascading Simple Sheets",
-  //     "Cars SUVs Sailboats",
-  //   ],
-  //   correct: "Cascading Style Sheets",
-  // },
-  // {
-  //   question: "Что означает HTML?",
-  //   answers: [
-  //     "Hypertext Markup Language",
-  //     "Hypertext Markdown Language",
-  //     "Hyperloop Machine Language",
-  //     "Helicopters Terminals Motorboats Lamborginis",
-  //   ],
-  //   correct: "Hypertext Markup Language",
-  // },
-  // {
-  //   question: "В каком году был создан JavaScript?",
-  //   answers: ["1996", "1995", "1994", "все ответы неверные"],
-  //   correct: "1995",
-  // },
+  {
+    question: "Какой язык работает в браузере?",
+    answers: ["Java", "C", "Python", "JavaScript"],
+    correct: "JavaScript",
+  },
+  {
+    question: "Что означает CSS?",
+    answers: [
+      "Central Style Sheets",
+      "Cascading Style Sheets",
+      "Cascading Simple Sheets",
+      "Cars SUVs Sailboats",
+    ],
+    correct: "Cascading Style Sheets",
+  },
+  {
+    question: "Что означает HTML?",
+    answers: [
+      "Hypertext Markup Language",
+      "Hypertext Markdown Language",
+      "Hyperloop Machine Language",
+      "Helicopters Terminals Motorboats Lamborginis",
+    ],
+    correct: "Hypertext Markup Language",
+  },
+  {
+    question: "В каком году был создан JavaScript?",
+    answers: ["1996", "1995", "1994", "все ответы неверные"],
+    correct: "1995",
+  },
   {
     question: `Что будет выведено в консоль в результате выполнения данного кода?
     <span class="code">
@@ -55,6 +55,35 @@ const questions = [
     `,
     answers: ["[0, 12, 3, 34, 7]", "[0, 3, 7, 12, 34]", "[0, 12, 3, 7, 34]", "[34, 12, 7, 3, 0]"],
     correct: "[34, 12, 7, 3, 0]",
+  },
+  {
+    question: `Что будет выведено в консоль?
+    <span class="code">
+
+   let a = 0;<br>
+   let b = 3;<br>
+   a ||= b;<br>
+   console.log(a)
+
+    </span>
+    `,
+    answers: ["SyntaxError: Unexpected token '||='", "3", "undefined", "0"],
+    correct: "3",
+  },
+  {
+    question: `Что будет выведено в консоль?
+    <span class="code">
+
+   function Foo(){<br>
+    return 111;<br>
+   }<br>
+   console.log(new Foo());<br>
+   console.log(Foo());
+
+    </span>
+    `,
+    answers: ["undefined 111", "Foo{} 111", "111 111", "Foo{} Foo{}"],
+    correct: "Foo{} 111",
   },
   {
     question: `Что будет выведено в консоль в результате выполнения данного кода?
@@ -102,7 +131,7 @@ function clearPage() {
 function showQuestion() {
   const subtitleTemplate = `<p id="subtitle">%currentQuestion% / %allQuestions%</p>`
   let subtitleTemplateNew = subtitleTemplate.replace('%currentQuestion%', questionIndex + 1)
-  subtitleTemplateNew = subtitleTemplateNew.replace('%allQuestions%', questions.length)  
+  subtitleTemplateNew = subtitleTemplateNew.replace('%allQuestions%', questions.length)
   subtitle.innerHTML = subtitleTemplateNew
 
   const headerTemplate = `<h2 class="title">%title%</h2>`;
@@ -203,8 +232,9 @@ function shuffleAnswers(array) {
   })
 }
 
-function changeColor () {
+function changeColor() {
   // const regExp = /(?<![-.])\b[0-9]+\b(?!\.[0-9])/
+  // const regExp = /\d+/g
   let functionTemplate = `<span class='orange'>function</span>`
   let returnTemplate = `<span class='orange'>return</span>`
   let logTemplate = `<span class='orange'>log</span>`
@@ -215,7 +245,9 @@ function changeColor () {
   let letTemplate = `<span class='red'>let</span>`
   let inTemplate = `<span class='red'>in</span>`
   let constTemplate = `<span class='red'>const</span>`
-  questions.map(item=> {
+  questions.map(item => {
+    // let matchNumber = item.question.match(regExp)
+    // console.log(matchNumber)
     item.question = item.question.replaceAll('function', functionTemplate)
     item.question = item.question.replaceAll('console', consoleTemplate)
     item.question = item.question.replaceAll('return', returnTemplate)
