@@ -1,41 +1,79 @@
 const questions = [
-  {
-    question: "Какой язык работает в браузере?",
-    answers: ["Java", "C", "Python", "JavaScript"],
-    correct: "JavaScript",
-  },
-  {
-    question: "Что означает CSS?",
-    answers: [
-      "Central Style Sheets",
-      "Cascading Style Sheets",
-      "Cascading Simple Sheets",
-      "Cars SUVs Sailboats",
-    ],
-    correct: "Cascading Style Sheets",
-  },
-  {
-    question: "Что означает HTML?",
-    answers: [
-      "Hypertext Markup Language",
-      "Hypertext Markdown Language",
-      "Hyperloop Machine Language",
-      "Helicopters Terminals Motorboats Lamborginis",
-    ],
-    correct: "Hypertext Markup Language",
-  },
-  {
-    question: "В каком году был создан JavaScript?",
-    answers: ["1996", "1995", "1994", "все ответы неверные"],
-    correct: "1995",
-  },
+  // {
+  //   question: "Какой язык работает в браузере?",
+  //   answers: ["Java", "C", "Python", "JavaScript"],
+  //   correct: "JavaScript",
+  // },
+  // {
+  //   question: "Что означает CSS?",
+  //   answers: [
+  //     "Central Style Sheets",
+  //     "Cascading Style Sheets",
+  //     "Cascading Simple Sheets",
+  //     "Cars SUVs Sailboats",
+  //   ],
+  //   correct: "Cascading Style Sheets",
+  // },
+  // {
+  //   question: "Что означает HTML?",
+  //   answers: [
+  //     "Hypertext Markup Language",
+  //     "Hypertext Markdown Language",
+  //     "Hyperloop Machine Language",
+  //     "Helicopters Terminals Motorboats Lamborginis",
+  //   ],
+  //   correct: "Hypertext Markup Language",
+  // },
+  // {
+  //   question: "В каком году был создан JavaScript?",
+  //   answers: ["1996", "1995", "1994", "все ответы неверные"],
+  //   correct: "1995",
+  // },
   {
     question: `Что будет выведено в консоль в результате выполнения данного кода?
-    <span class="code">function foo() {} <br>
-    console.log(typeof foo());</span>
+    <span class="code">
+
+    function foo() {} <br>
+    console.log(typeof foo());
+
+    </span>
     `,
     answers: ["function", "undefined", "null", "number"],
     correct: "undefined",
+  },
+  {
+    question: `Что будет выведено в консоль в результате выполнения данного кода?
+    <span class="code">
+
+    const arr1 = [34, 12, 3, 0, 7];<br>
+    const arr2 = arr1.sort(<br>
+      (a, b) => b - a <br>
+      ); <br>
+      console.log(arr2);
+
+    </span>
+    `,
+    answers: ["[0, 12, 3, 34, 7]", "[0, 3, 7, 12, 34]", "[0, 12, 3, 7, 34]", "[34, 12, 7, 3, 0]"],
+    correct: "[34, 12, 7, 3, 0]",
+  },
+  {
+    question: `Что будет выведено в консоль в результате выполнения данного кода?
+    <span class="code">
+
+    for(let i in { a:0, b:1}){<br>
+      console.log(i);<br>
+    }
+    
+    </span>
+    `,
+    answers: ["0 1", "undefined undefined", "null null", "a b"],
+    correct: "a b",
+  },
+  {
+    question: `C помощью какого метода можно создать новый объект с указанными объектом прототипа и свойствами?
+    `,
+    answers: ["Object.fromEntries()", "Object.create()", "Object.assign()", "Object.is()"],
+    correct: "Object.create()",
   },
 ];
 
@@ -47,6 +85,7 @@ const listContainer = document.querySelector("#list");
 const submitBtn = document.querySelector("#submit");
 const subtitle = document.querySelector("#subtitle");
 
+changeColor()
 shuffleQuestions(questions)
 // Доработать функцию ниже
 shuffleAnswers(questions)
@@ -162,5 +201,30 @@ function shuffleAnswers(array) {
   array = array.map(item => {
     shuffleQuestions(item.answers)
   })
+}
 
+function changeColor () {
+  // const regExp = /(?<![-.])\b[0-9]+\b(?!\.[0-9])/
+  let functionTemplate = `<span class='orange'>function</span>`
+  let returnTemplate = `<span class='orange'>return</span>`
+  let logTemplate = `<span class='orange'>log</span>`
+  let sortTemplate = `<span class='orange'>sort</span>`
+  let typeofTemplate = `<span class='orange'>typeof</span>`
+  let consoleTemplate = `<span class='blue'>console</span>`
+  let forTemplate = `<span class='red'>for</span>`
+  let letTemplate = `<span class='red'>let</span>`
+  let inTemplate = `<span class='red'>in</span>`
+  let constTemplate = `<span class='red'>const</span>`
+  questions.map(item=> {
+    item.question = item.question.replaceAll('function', functionTemplate)
+    item.question = item.question.replaceAll('console', consoleTemplate)
+    item.question = item.question.replaceAll('return', returnTemplate)
+    item.question = item.question.replaceAll('for', forTemplate)
+    item.question = item.question.replaceAll('let', letTemplate)
+    item.question = item.question.replaceAll('in', inTemplate)
+    item.question = item.question.replaceAll('log', logTemplate)
+    item.question = item.question.replaceAll('typeof', typeofTemplate)
+    item.question = item.question.replaceAll('const', constTemplate)
+    item.question = item.question.replaceAll('sort', sortTemplate)
+  })
 }

@@ -166,9 +166,22 @@ body {
 	margin-top: 25px;
 	padding: 10px 10px 10px 35px;
 	background-color: #f3f3f3;
-	color: rgb(88, 88, 88);
+	color: rgb(112, 111, 111);
 	text-align: left;
 	font-size: 1rem;
+	letter-spacing: 0.05em;
+}
+.orange {
+	color: orange;
+}
+.blue {
+	color: rgb(80, 101, 170);
+}
+.red {
+	color: rgb(128, 47, 47);
+}
+.green{
+	color:rgb(36, 144, 77)
 }
 
 @keyframes shake {
